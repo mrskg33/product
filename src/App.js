@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
+import Home from "./component/Home";
+import Product from "./component/Product";
+import Header from "./component/Header";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import Dynamic from "./component/Dynamic";
+import DynamicTable from "./component/DynamicTable";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Header />}>
+            <Route index element={<Home />} />
+            <Route path="/add" element={<Product />} />
+            <Route path="/dynamicForm" element={<Dynamic />} />
+            <Route path="/dynamicTable" element={<DynamicTable />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </Provider>
+    
   );
 }
 
